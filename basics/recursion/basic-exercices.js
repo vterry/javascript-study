@@ -36,7 +36,7 @@ function memFact(n) {
 }
 
 console.log("Factorial without memoize: " + fact(5));
-console.log("Factorial without memoize: " + memFact(5));
+console.log("Factorial with memoize: " + memFact(5));
 
 // power of a number
 
@@ -66,3 +66,33 @@ function e(x, n) {
 }
 
 console.log("taylor result is: " + e(1, 10));
+
+// Combination Formula using recursion
+
+function combination(n, r) {
+  if (r === 0 || n === r) {
+    return 1;
+  } else {
+    return combination(n - 1, r - 1) + combination(n - 1, r);
+  }
+}
+
+console.log("Combinations using pascal triangule is: " + combination(4, 2));
+
+// Hanoi tower with recursion
+
+let counter = 0;
+
+function hanoiOf(diskNum, towerA, towerB, towerC) {
+  if (diskNum > 0) {
+    counter++;
+    hanoiOf(diskNum - 1, towerA, towerC, towerB);
+    console.log(
+      "Solution is steps is move from tower " + towerA + " to tower " + towerC
+    );
+    hanoiOf(diskNum - 1, towerB, towerA, towerC);
+  }
+}
+
+hanoiOf(10, 1, 2, 3);
+console.log("Quantidade de movimentos minimos é: " + counter);
