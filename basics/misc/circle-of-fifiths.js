@@ -29,9 +29,13 @@ function generateMajorScale(note) {
     return enharmony;
   }
 
-  majorScalePattern.forEach((interval) => {
+  function checkNote(search, scale) {
+    return scale.some((note) => note.includes(search));
+  }
+
+  majorScalePattern.forEach((interval, index) => {
     startIndex = (startIndex + interval) % notes.length;
-    if (majorScalePattern[startIndex + 1] === 1) {
+    if (checkNote(notes[index].charAt(0), scale)) {
       if (getEnharmony(notes[startIndex]) !== "") {
         scale.push(getEnharmony(notes[startIndex]));
         return;
@@ -43,4 +47,35 @@ function generateMajorScale(note) {
   return scale;
 }
 
-console.log(generateMajorScale("C#"));
+console.log(
+  generateMajorScale("C").toString() ==
+    ["C", "D", "E", "F", "G", "A", "B", "C"].toString()
+);
+console.log(
+  generateMajorScale("G").toString() ==
+    ["G", "A", "B", "C", "D", "E", "F#", "G"].toString()
+);
+console.log(
+  generateMajorScale("D").toString() ==
+    ["D", "E", "F#", "G", "A", "B", "C#", "D"].toString()
+);
+console.log(
+  generateMajorScale("A") ==
+    ["A", "B", "C#", "D", "E", "F#", "G#", "A"].toString()
+);
+console.log(
+  generateMajorScale("E") ==
+    ["E", "F#", "G#", "A", "B", "C#", "D#", "E"].toString()
+);
+console.log(
+  generateMajorScale("B") ==
+    ["B", "C#", "D#", "E", "F#", "G#", "A#", "B"].toString()
+);
+console.log(
+  generateMajorScale("F#") ==
+    ["F#", "G#", "A#", "B", "C#", "D#", "E#", "F#"].toString()
+);
+console.log(
+  generateMajorScale("C#").toString() ==
+    ["C#", "D#", "E#", "F#", "G#", "A#", "B#", "C#"].toString()
+);
